@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <!-- inherit partner form view -->
+        <record id="view_res_partner_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group[1]" position="after">
+                    <group string="Info">
+                        <group>
+                            <field name="ref" string="Référence"/>
+                            <field name="team_id" string="Commercial"/>
+                            <!-- <field name="nbr_employee"/> -->
+                        </group>
+                        <group>
+                            <field t-if="'company_type' != 'person'" name="vat" string ="ICE" attrs="{'invisible': [('company_type', '=', 'person')]}"/>
+                            <field name="rc" attrs="{'invisible': [('company_type', '=', 'person')]}"/>
+                            <field name="cnss" attrs="{'invisible': [('company_type', '=', 'person')]}"/>
+                            <field name="if_partner" attrs="{'invisible': [('company_type', '=', 'person')]}"/>
+                            <!-- <field name="patente" attrs="{'invisible': [('company_type', '=', 'person')]}"/>
+                            <field name="capital" attrs="{'invisible': [('company_type', '=', 'person')]}"/> -->
+                        </group>
+                    </group>
+                </xpath>
+                <xpath expr="//group/group/field[@name='vat']" position="replace"> 
+                    <field name="vat" placeholder="e.g. BE0477472701" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='phone']" position="after"> 
+                    <field name="fax"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- form view inherited to make phone required filed -->
+        <!-- <record id="partner_form_send_sms_form_view_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form.send.sms.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="sms.partner_form_send_sms_form_view" />
+            <field name="arch" type="xml">
+                <field name="phone" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+            </field>
+        </record> -->
+</odoo>

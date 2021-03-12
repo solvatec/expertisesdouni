@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <template id="external_layout_header2" inherit_id="stock.report_delivery_document">
+            <xpath expr="//div[@t-esc='partner']" position="replace">
+                <div></div>
+            </xpath>
+            <xpath expr="//div[@class='page']" position="replace">
+                <div class="page">
+                <br/><br/><br/><br/><br/>
+                    <div class="address row">
+                        <div class="col-7">
+                        </div>
+                        <div class="col-5">
+                            <B><span t-esc="o.partner_id.name" style="font-size:13px"/></B><br/>
+                            <span t-if="o.partner_id.street" t-esc="o.partner_id.street" style="font-size:13px"/><br/>
+                            <span t-if="o.partner_id.city" t-esc="o.partner_id.city" style="font-size:13px"/>
+                        </div>
+                    </div>
+                    <h2>
+                        <br/><br/>
+                        <div class="col-8" style="text-align: center;">
+                            <span>Bon de livraison</span>
+                        </div>
+                    </h2>
+                    <h2>
+                    <div class="col-8">
+                        <table class="table">
+                            <tr style="border: 1px solid black; text-align: center; font-size: 13px;">
+                                <th name="td_sched_date_h" style="border: 1px solid black; text-align: center; font-size: 13px;">
+                                    Date
+                                </th>
+                                <th t-if="o.name" style="border: 1px solid black; text-align: center; font-size: 13px;">
+                                    Numéro
+                                </th>
+                                <th t-if="o.origin" style="border: 1px solid black; text-align: center; font-size: 13px;">
+                                    Source
+                                </th>
+                            </tr>
+                            <tr style="border: 1px solid black; text-align: center; font-size: 13px;">
+                                <td name="td_sched_date">
+                                   <t t-if="o.state == 'done'">
+                                        <span t-esc="o.date_done" t-options='{"widget":"date"}'/>
+                                   </t>
+                                   <t t-if="o.state != 'done'">
+                                        <span t-esc="o.scheduled_date" t-options='{"widget":"date"}'/>
+                                   </t>
+                                </td>
+                                <td t-if="o.name" style="border: 1px solid black; text-align: center; font-size: 13px;">
+                                    <span t-esc="o.name"/>
+                                </td>
+                                <td t-if="o.origin" style="border: 1px solid black; text-align: center; font-size: 13px;">
+                                    <span t-esc="o.origin"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                	</h2>
+                    <table class="table table-sm o_main_table" t-if="o.state!='done'">
+                        <thead>
+                            <tr>
+                                <th><strong>Code</strong></th>
+                                <th><strong>Désignation</strong></th>
+                                <th><strong>Quantité</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="lines" t-value="o.move_lines.filtered(lambda x: x.product_uom_qty)"/>
+                            <tr t-foreach="lines" t-as="move">
+                                <td>
+                                    <span t-field="move.product_id.default_code"/>
+                                    <p t-if="o.picking_type_code == 'outgoing'">
+                                        <span t-field="move.product_id.sudo().description_pickingout"/>
+                                    </p>
+                                    <p t-if="o.picking_type_code == 'incoming'">
+                                        <span t-field="move.product_id.sudo().description_pickingin"/>
+                                    </p>
+                                </td>
+                                <td>
+                                    <span t-field="move.product_id.name"/>
+                                    <p t-if="o.picking_type_code == 'outgoing'">
+                                        <span t-field="move.product_id.sudo().description_pickingout"/>
+                                    </p>
+                                    <p t-if="o.picking_type_code == 'incoming'">
+                                        <span t-field="move.product_id.sudo().description_pickingin"/>
+                                    </p>
+                                </td>
+                                <td>
+                                    <span t-field="move.product_uom_qty"/>
+                                    <span t-field="move.product_uom"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm o_main_table" t-if="o.move_line_ids and o.state=='done'">
+                        <t t-set="has_serial_number" t-value="o.move_line_ids.mapped('lot_id')"/>
+                        <thead>
+                            <tr>
+                                <th><strong>Code</strong></th>
+                                <th><strong>Désignation</strong></th>
+                                <th name="lot_serial" t-if="has_serial_number" groups="stock.group_lot_on_delivery_slip">
+                                    Lot/Serial Number
+                                </th>
+                                <th class="text-center"><strong>Quantity</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="o.move_line_ids" t-as="move_line">
+                                <td>
+                                    <span t-field="move_line.product_id.default_code"/>
+                                    <p t-if="o.picking_type_code == 'outgoing'">
+                                        <span t-field="move_line.product_id.sudo().description_pickingout"/>
+                                    </p>
+                                    <p t-if="o.picking_type_code == 'incoming'">
+                                        <span t-field="move_line.product_id.sudo().description_pickingin"/>
+                                    </p>
+                                </td>
+                                <td>
+                                    <span t-field="move_line.product_id.name"/>
+                                    <p t-if="o.picking_type_code == 'outgoing'">
+                                        <span t-field="move_line.product_id.sudo().description_pickingout"/>
+                                    </p>
+                                    <p t-if="o.picking_type_code == 'incoming'">
+                                        <span t-field="move_line.product_id.sudo().description_pickingin"/>
+                                    </p>
+                                </td>
+                                <td t-if="has_serial_number and move_line.lot_name" groups="stock.group_lot_on_delivery_slip">
+                                    <span t-field="move_line.lot_name"/>
+                                </td>
+                                <td t-else="" groups="stock.group_lot_on_delivery_slip">
+                                    <span t-field="move_line.lot_id.name"/>
+                                </td>
+                                <td class="text-center">
+                                    <span t-field="move_line.qty_done"/>
+                                    <span t-field="move_line.product_uom_id"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-8">
+                        </div>
+                        <div class="col-4">
+                        <table class="table" style="border: 2px solid black; width:100%;left;">
+                            <tr style="height:25px;">
+                                <th style="text-align: left;"><font color="black">Bon pour récéption</font></th>
+                            </tr>
+                            <tr style="height:100px;">
+                                <td style="background-color:white"></td>
+                            </tr>
+                        </table>
+                        </div>
+                    </div>
+                    <p>
+                        <t t-if="o.backorder_ids and o.backorder_ids.filtered(lambda x: x.state not in ('done', 'cancel'))">
+                            All items couldn't be shipped, the remaining ones will be shipped as soon as they become available.
+                        </t>
+                    </p>
+                </div>
+	        </xpath>
+        </template>
+</odoo>
