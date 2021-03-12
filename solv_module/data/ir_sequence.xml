@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <!-- Partner Limit Sequence -->
+        <!-- <record model="ir.sequence" id="seq_partner_credit_limit">
+            <field name="name">Partner</field>
+            <field name="code">partner</field>
+            <field name="implementation">standard</field>
+            <field name="prefix">LC</field>
+            <field name="padding" eval="5" />
+            <field name="number_next" eval="1" />
+            <field name="number_increment" eval="1" />
+        </record> -->
+</odoo>
