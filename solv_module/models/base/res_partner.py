@@ -42,9 +42,9 @@ class ResPartner(models.Model):
     )
 
 
-    nbr_employee = fields.Integer(
-    	string='Nbre employes',
-    )
+    #nbr_employee = fields.Integer(
+    #	string='Nbre employes',
+    #)
 
     # ------------------------------------------------------------------------
     # CONSTRAINTS
