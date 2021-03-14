@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <!-- inherit invoice form view -->
+        <!-- <record id="view_account_move_form_inherit" model="ir.ui.view">
+            <field name="name">account.move.form.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="payment_type_invoice" attrs="{'readonly': [('state', '!=', 'draft')]}" string="Type de paiement"/>
+                </xpath>
+            </field>
+        </record> -->
+
+        <!-- inherit invoice tree view -->
+        <!-- <record id="view_account_invoice_tree_inherit" model="ir.ui.view">
+            <field name="name">account.move.tree.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='state']" position="before">
+                    <field name="payment_type_invoice" string="Type de paiement"/>
+                </xpath>
+            </field>
+        </record> -->
+
+        <!-- form view inherited to make phone required filed -->
+        <!-- <record id="partner_form_send_sms_form_view_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form.send.sms.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="sms.partner_form_send_sms_form_view" />
+            <field name="arch" type="xml">
+                <field name="phone" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+            </field>
+        </record> -->
+
+</odoo>
