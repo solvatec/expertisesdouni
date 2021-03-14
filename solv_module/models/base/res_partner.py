@@ -46,7 +46,7 @@ class ResPartner(models.Model):
     )
 
     partner_type = fields.Selection(
-        string='Typde de compte',
+        string='Type de compte',
         selection='get_selection_partner_type'
     )
 
