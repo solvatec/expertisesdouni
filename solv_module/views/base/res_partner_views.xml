@@ -12,8 +12,8 @@
                             <field name="ref" string="Référence"/>
                             <field name="industry_id" string="Secteur d'activité"/>
                             <field name="team_id" string="Commercial"/>
-                            <field name="nbr_employee"/>
-                            <field name="partner_type"/>
+                            <!-- <field name="nbr_employee"/>
+                            <field name="partner_type"/> -->
                         </group>
                         <group>
                             <field t-if="'company_type' != 'person'" name="vat" string ="ICE" attrs="{'invisible': [('company_type', '=', 'person')]}"/>

@@ -41,14 +41,14 @@ class ResPartner(models.Model):
         string='Capital',
     )
 
-    nbr_employee = fields.Integer(
-        string='Nombre d’employés',
-    )
+    # nbr_employee = fields.Integer(
+    #     string='Nombre d’employés',
+    # )
 
-    partner_type = fields.Selection(
-        string='Typde de compte',
-        selection='get_selection_partner_type'
-    )
+    # partner_type = fields.Selection(
+    #     string='Typde de compte',
+    #     selection='get_selection_partner_type'
+    # )
 
     # ------------------------------------------------------------------------
     # CONSTRAINTS
@@ -66,11 +66,11 @@ class ResPartner(models.Model):
     # METHODS
     # ------------------------------------------------------------------------
 
-    @api.model
-    def get_selection_partner_type(self):
-        return [
-            ('prospect', _('Prospect')),
-            ('assureur', _('Assureur')),
-            ('assureur_conseil', _('Assureur Conseil')),
-            ('expert_cie', _('Expert Cie')),
-        ]
+    # @api.model
+    # def get_selection_partner_type(self):
+    #     return [
+    #         ('prospect', _('Prospect')),
+    #         ('assureur', _('Assureur')),
+    #         ('assureur_conseil', _('Assureur Conseil')),
+    #         ('expert_cie', _('Expert Cie')),
+    #     ]
