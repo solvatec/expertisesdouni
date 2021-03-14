@@ -41,10 +41,14 @@ class ResPartner(models.Model):
         string='Capital',
     )
 
+    nbr_employee = fields.Integer(
+        string='Nombre d’employés',
+    )
 
-    #nbr_employee = fields.Integer(
-    #	string='Nbre employes',
-    #)
+    partner_type = fields.Selection(
+        string='Typde de compte',
+        selection='get_selection_partner_type'
+    )
 
     # ------------------------------------------------------------------------
     # CONSTRAINTS
@@ -62,15 +66,11 @@ class ResPartner(models.Model):
     # METHODS
     # ------------------------------------------------------------------------
 
-    # @api.constrains('rc', 'cnss', 'ice', 'company_type')
-    # def check_fields(self):
-    #     for record in self:
-    #         if self.company_type == 'company':
-    #             related_ice = self.env['res.partner'].search([('id', '!=', self.id), ('ice', '=', self.ice)])
-    #             related_rc = self.env['res.partner'].search([('id', '!=', self.id), ('rc', '=', self.rc)])
-    #             related_cnss = self.env['res.partner'].search([('id', '!=', self.id),('cnss', '=', self.cnss)])
-    #             if record.ice:
-    #                 if len(record.ice) !=15 and len(record.ice) !=9:
-    #                     raise ValidationError(_('ICE doit contenir 15 ou 9 caractères ! %s')  % (record.name))
-    #             else:
-    #                 raise ValidationError(_('Merci de renseigner ICE ! %s')  % (record.name))
+    @api.model
+    def get_selection_partner_type(self):
+        return [
+            ('prospect', _('Prospect')),
+            ('assureur', _('Assureur')),
+            ('assureur_conseil', _('Assureur Conseil')),
+            ('expert_cie', _('Expert Cie')),
+        ]
