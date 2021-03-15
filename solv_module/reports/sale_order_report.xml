@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
         <template id="solv_report_saleorder_document" inherit_id="sale.report_saleorder_document">
-            <xpath expr="//div[@t-field='doc.partner_id']" position="replace">
+            <xpath expr="//t[@t-set='address']" position="replace">
                 <div></div>
             </xpath>
             <xpath expr="//div[@class='page']" position="replace">
