@@ -50,6 +50,11 @@ class ResPartner(models.Model):
         selection='get_selection_partner_type'
     )
 
+    partner_type_id = fields.Many2one(
+        comodel_name='partner.type',
+        string='Type de compte'
+    )
+
     # ------------------------------------------------------------------------
     # CONSTRAINTS
     # ------------------------------------------------------------------------
@@ -74,3 +79,14 @@ class ResPartner(models.Model):
             ('assureur_conseil', _('Assureur Conseil')),
             ('expert_cie', _('Expert Cie')),
         ]
+
+class PartnerType(models.Model):
+    _name = 'partner.type'
+
+    # ------------------------------------------------------------------------
+    # FIELDS
+    # ------------------------------------------------------------------------
+
+    name = fields.Char(
+        string='Nom',
+    )
