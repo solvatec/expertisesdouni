@@ -45,10 +45,14 @@ class ResPartner(models.Model):
         string='Nombre d’employés',
     )
 
-    # partner_type = fields.Selection(
-    #     string='Type de compte',
-    #     selection='get_selection_partner_type'
-    # )
+    # Sites
+    partner_site_ids = fields.Many2many(
+        string='Sites',
+        comodel_name='res.partner',
+        relation='site_res_partner_rel',
+        column1='parent_id',
+        column2='site_partner_id',
+    )
 
     partner_type_id = fields.Many2one(
         comodel_name='partner.type',

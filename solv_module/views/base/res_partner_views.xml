@@ -32,6 +32,11 @@
                 <xpath expr="//field[@name='phone']" position="after"> 
                     <field name="fax"/>
                 </xpath>
+                <xpath expr="//page[@name='contact_addresses']" position="after"> 
+                    <page string="Sites" name="partner_sites">
+                        <field name="partner_site_ids"/>
+                    </page>
+                </xpath>
             </field>
         </record>
 
