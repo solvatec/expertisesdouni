@@ -33,7 +33,7 @@
                 <xpath expr="//div[@name='options_active']" position="attributes">
                     <attribute name="attrs">{'invisible': [('type_project', 'not in', ('project',False))]}</attribute>
                 </xpath>
-                <xpath expr="//button[@name='364']" position="attributes">
+                <xpath expr="//button[@name='476']" position="attributes">
                     <attribute name="attrs">{'invisible': [('type_project', 'not in', ('project',False))]}</attribute>
                 </xpath>                
             </field>
