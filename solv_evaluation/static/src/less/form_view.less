@@ -1,0 +1,96 @@
+.o_form_view > .o_form_sheet > .row > .col-xs-12 > .o_statusbar_status {
+            position: relative; // Needed for the "More" dropdown
+            .o-flex-display();
+            .o-justify-content(space-between);
+            padding-left: @odoo-horizontal-padding;
+            border-bottom: 1px solid @gray-lighter-darker;
+            background-color: @odoo-view-background-color;
+            .o-flex-flow(row-reverse, wrap-reverse);
+            .o-align-self(stretch);
+            .o-align-items(stretch);
+            overflow-x: hidden; // to prevent horizontal scroll due to last arrow
+
+            > .o_arrow_button {
+                min-height: @odoo-statusbar-height;
+                font-size: 11px;
+                font-weight: bold;
+                position: relative;
+                padding-left: @odoo-statusbar-arrow-width*2;
+                color: @gray;
+                border-width: 0 0 0;
+                border-radius: 0;
+                .o-transition(all, 0.1s);
+
+                &:first-child {
+                    padding-right: @odoo-horizontal-padding; // Compensate container padding
+                }
+                &:last-child {
+                    padding-left: @odoo-horizontal-padding - 1;
+                    border-left: 1px solid @gray-lighter-darker;
+                }
+
+                &:active {
+                    box-shadow: none;
+                }
+
+                &.disabled {
+                    opacity: 1.0;
+                    color: @text-muted;
+                    pointer-events: none;
+                    border-left: 1px solid @gray-lighter-dark;
+                }
+
+                &:before, &:after {
+                    content: " ";
+                    display: block;
+                    .o-position-absolute(0, -@odoo-statusbar-arrow-width + 1);
+
+                    border-top: floor(@odoo-statusbar-height/2) solid transparent;
+                    border-bottom: ceil(@odoo-statusbar-height/2) solid transparent;
+                    border-right: none;
+                    border-left: @odoo-statusbar-arrow-width solid @odoo-view-background-color;
+                    .o-transition(border, 0.2s);
+                    -moz-transform: scale(0.9999); // Smooth the triangle on firefox
+                }
+
+                &:not(.disabled) {
+                    &:hover, &:active, &:focus {
+                        color: @odoo-brand-optional;
+                        background-color: @gray-lighter;
+
+                        &:after {
+                            border-left-color: @gray-lighter;
+                        }
+                    }
+                }
+
+                &:before {
+                    right: -@odoo-statusbar-arrow-width;
+                    border-left-color: @gray-lighter-dark;
+                }
+
+                &.btn-primary.disabled {
+                    color: @odoo-brand-primary;
+                    font-size: 11px;
+                    background-color: @gray-lighter;
+                    cursor: default;
+
+                    &:after {
+                        border-left-color: @gray-lighter;
+                    }
+                }
+
+                .caret {
+                    margin-top: -2px;
+                }
+            }
+
+            .o-status-more {
+                .o-position-absolute(100%, 0);
+                min-width: 100px;
+                > li > button {
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+        }

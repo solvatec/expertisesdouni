@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!--formulaire Etape projet-->
+        <record model="ir.ui.view" id="view_project_stage_form">
+            <field name="name">project.stage.form</field>
+            <field name="model">project.stage</field>
+            <field name="arch" type="xml">
+                <form>
+                <sheet>                 
+                    <group>
+                        <group> 
+                            <field name="name"/>
+                            <field name="type_project_stage"/>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </group>
+                </sheet>
+                </form>
+            </field>
+        </record>
+            
+        <record model="ir.ui.view" id="view_project_stage_tree">
+            <field name="name">project.stage.tree</field>
+            <field name="model">project.stage</field>
+            <field name="arch" type="xml">        
+                <tree string="Etape projet">
+                    <field name="name"/>
+                    <field name="type_project_stage"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="project_stage_search_view" model="ir.ui.view">
+            <field name="name">project.stage.search.view</field>
+            <field name="model">project.stage</field>
+            <field name="arch" type="xml">
+                <search string="Etape projet">
+                    <field name="name"/> 
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_project_stage">
+            <field name="name">Etapes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">project.stage</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+             <p class="oe_view_nocontent_create">
+                    Cliquer ici pour ajouter un nouveau élément.
+            </p>        
+            </field>
+        </record>
+    </data>
+</odoo>

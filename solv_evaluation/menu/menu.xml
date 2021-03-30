@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Menu evaluation  -->
+        <menuitem sequence="20" web_icon="solv_evaluation,static/img/mission-icon.png" id="menu_projects_evaluation" action="solv_evaluation.act_project_project_evaluation" groups="project.group_project_manager" name="Evaluation"/>
+        <menuitem sequence="21" id="menu_evaluation" parent="menu_projects_evaluation" action="solv_evaluation.act_project_project_evaluation" groups="project.group_project_manager" name="Evaluation"/>
+        <!-- Menu Etape evaluation -->
+        <menuitem sequence="22" id="menu_projects_evaluation_stage" parent="menu_projects_evaluation" action="solv_evaluation.action_project_stage" groups="project.group_project_manager" name="Etapes"/>
+        <!-- <menuitem sequence="23" id="project_evaluation_menu_config_activity_type" action="solv_evaluation.mail_activity_type_action_config_project_evaluation_types" parent="menu_projects_evaluation"/> -->
+        
+    </data>
+</odoo>
