@@ -24,13 +24,13 @@
     'data': [
         #data
         # security
-        # 'security/ir.model.access.csv',
-        # 'security/security.xml',
+        'security/ir.model.access.csv',
+        'security/security.xml',
         #views
         'views/evaluation/evaluation_views.xml',
-        # 'views/evaluation/project_stage_views.xml',
+        'views/evaluation/project_stage_views.xml',
         #menu
-        # 'menu/menu.xml',
+        'menu/menu.xml',
         #wizards
         # 'wizard/wizard_add_product_view.xml',
         # reports
