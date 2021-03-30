@@ -45,11 +45,6 @@ class ResPartner(models.Model):
         string='Nombre d’employés',
     )
 
-    # partner_type = fields.Selection(
-    #     string='Type de compte',
-    #     selection='get_selection_partner_type'
-    # )
-
     partner_type_id = fields.Many2one(
         comodel_name='partner.type',
         string='Type de compte'
