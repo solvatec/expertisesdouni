@@ -65,7 +65,6 @@ class ResPartner(models.Model):
     # ------------------------------------------------------------------------
     # METHODS
     # ------------------------------------------------------------------------
-
     @api.model
     def get_selection_partner_type(self):
         return [
@@ -74,6 +73,22 @@ class ResPartner(models.Model):
             ('assureur_conseil', _('Assureur Conseil')),
             ('expert_cie', _('Expert Cie')),
         ]
+
+    @api.onchange('parent_id')
+    def onchange_parent_id(self):
+        # return values in result, as this method is used by _fields_sync()
+        if not self.parent_id:
+            return
+        result = {}
+        partner = self._origin
+        if partner.parent_id and partner.parent_id != self.parent_id:
+            result['warning'] = {
+                'title': _('Warning'),
+                'message': _('Changing the company of a contact should only be done if it '
+                             'was never correctly set. If an existing contact starts working for a new '
+                             'company then a new contact should be created under that new '
+                             'company. You can use the "Discard" button to abandon this change.')}
+        return result
 
 class PartnerType(models.Model):
     _name = 'partner.type'
