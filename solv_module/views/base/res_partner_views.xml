@@ -9,7 +9,6 @@
                 <xpath expr="//sheet/group[1]" position="after">
                     <group string="Info">
                         <group>
-                            <button name="button_customer_rank" string="Clients" type="object" class="btn-primary"/>
                             <field name="ref" string="Référence"/>
                             <field name="industry_id" string="Secteur d'activité"/>
                             <field name="team_id" string="Commercial"/>
