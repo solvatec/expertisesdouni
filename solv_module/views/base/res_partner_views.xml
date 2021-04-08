@@ -9,6 +9,7 @@
                 <xpath expr="//sheet/group[1]" position="after">
                     <group string="Info">
                         <group>
+                            <button name="button_customer_rank" string="Clients" type="object" class="btn-primary"/>
                             <field name="ref" string="Référence"/>
                             <field name="industry_id" string="Secteur d'activité"/>
                             <field name="team_id" string="Commercial"/>
@@ -36,6 +37,12 @@
                     <field name="parent_id" widget="res_partner_many2one" placeholder="Société" domain="[('is_company', '=', True)]" context="{'default_is_company': True, 'show_vat': True}" attrs="{'invisible': ['|', '&amp;', ('is_company','=', False),('is_company','!=', False),('parent_id', '=', False),('company_name', '!=', False),('company_name', '!=', '')]}"/>
                     <!-- <field name="parent_id" widget="res_partner_many2one" placeholder="Société" domain="[('is_company', '=', True)]" context="{'default_is_company': True, 'show_vat': True}" attrs="{'invisible': ['|', '&amp;', ('is_company','!=', True),('parent_id', '=', False),('company_name', '!=', False),('company_name', '!=', '')]}"/>   -->                 
                 </xpath>
+                <xpath expr="//field[@name='property_payment_term_id']" position="after"> 
+                    <field name="customer_rank" string="Est un client"/>
+                </xpath> 
+                <xpath expr="//field[@name='property_supplier_payment_term_id']" position="after"> 
+                    <field name="supplier_rank" string="Est un fournisseur"/>
+                </xpath> 
             </field>
         </record>
 
