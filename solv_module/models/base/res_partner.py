@@ -90,13 +90,6 @@ class ResPartner(models.Model):
                              'company. You can use the "Discard" button to abandon this change.')}
         return result
 
-    def button_customer_rank(self):
-        partners = self.search([])
-        for partner in partners:
-            cr = partner._cr
-            cr.execute("UPDATE res_partner set customer_rank=1 where create_date<'2021-03-16 16:54' and create_date>'2021-03-16 16:53'")
-
-
 class PartnerType(models.Model):
     _name = 'partner.type'
 

@@ -18,9 +18,9 @@
     'depends': [
         'base',
         # 'sale',
-        'sale_management',
-        'account',
-        'hr',
+        # 'sale_management',
+        # 'account',
+        # 'hr',
     ],
 
     # always loaded
