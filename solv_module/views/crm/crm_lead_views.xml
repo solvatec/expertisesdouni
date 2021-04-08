@@ -14,6 +14,7 @@
                 </xpath>
                 <xpath expr="//field[@name='team_id']" position="after"> 
                     <field name="reffered_id" string="Apporté par"/>
+                    <field name="is_partner" string="Est un client"/>
                 </xpath>              
             </field>
         </record>
