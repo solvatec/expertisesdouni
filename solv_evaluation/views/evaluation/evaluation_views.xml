@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <!-- inherit partner form view -->
-        <record id="view_res_partner_site_form_inherit" model="ir.ui.view">
-            <field name="name">res.partner.site.form.inherit</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//page[@name='contact_addresses']" position="after"> 
-                    <page string="Sites" name="partner_sites" attrs="{'invisible': [('company_type', '=', 'person')]}">
-                        <field name="partner_site_ids"/>
-                    </page>
-                </xpath>
-            </field>
-        </record>
-
+        
         <!-- inherit project form view -->      
         <record id="view_project_project_form_inherit" model="ir.ui.view">
             <field name="name">project.project.form.inherit</field>
@@ -33,7 +20,7 @@
                 <xpath expr="//div[@name='options_active']" position="attributes">
                     <attribute name="attrs">{'invisible': [('type_project', 'not in', ('project',False))]}</attribute>
                 </xpath>
-                <xpath expr="//button[@name='476']" position="attributes">
+                <xpath expr="//sheet/div/button[2]" position="attributes">
                     <attribute name="attrs">{'invisible': [('type_project', 'not in', ('project',False))]}</attribute>
                 </xpath>                
             </field>
@@ -52,20 +39,24 @@
                 <xpath expr="//div[@name='options_active']" position="after">
                     <group attrs="{'invisible': [('type_project', 'in', ('project','sinistre',False))]}">
                         <group>
-                            <field name="num_dossier"/>
-                            <field name="urgent"/> 
+                            <!-- <field name="num_dossier"/> -->
+                            <field name="partner_site_id" string="Adresse du site"/> 
                             <field name="partner_id" string="Groupe/ Société Mére"/>
-                            <field name="partner_site_id"/> 
                             <field name="partner_interm_id"/> 
+                            <field name="urgent"/>                            
                             <field name="nature_mission"/> 
-                            <field name="nature_dossier"/> 
-                        </group>
-                        <group>
+                            <field name="nature_dossier" string="DI ou MAJ ?"/>
                             <field name="type_maj" attrs="{'invisible': [('nature_dossier', '=', 'dossier_initial')]}"/> 
                             <field name="num_maj" attrs="{'invisible': [('nature_dossier', '=', 'dossier_initial')]}"/> 
+                        </group>
+                        <group>
+                            <field name="state"/>
+                            <field name="date_order"/>
+                            <field name="date_due"/>
+                            <field name="date_order_end"/>
+                            <field name="date_order_cancel"/>
                             <field name="state_order"/> 
                             <field name="scan_3d"/> 
-                            <field name="state"/>
                         </group>
                     </group>
                 </xpath> 
@@ -86,20 +77,17 @@
                             <field name="message_ids" widget="mail_thread"/>
                         </div>                   
                     </page>
-                    <page string="Dates de la Commande" attrs="{'invisible': [('type_project', 'in', ('project','sinistre',False))]}">
+                    <!-- <page string="Dates de la Commande" attrs="{'invisible': [('type_project', 'in', ('project','sinistre',False))]}">
                         <group>
                             <group>
-                                <field name="date"/>
-                                <field name="date_order"/>
-                                <field name="date_due"/>
+                                
                             </group>
                             <group>
-                                <field name="date_order_end"/>
-                                <field name="date_order_cancel"/>
+                                
                             </group>
                         </group>                   
-                    </page>
-                    <page string="Autres dates" attrs="{'invisible': [('type_project', 'in', ('project','sinistre',False))]}">
+                    </page -->
+                    <page string="Dates de la Commande" attrs="{'invisible': [('type_project', 'in', ('project','sinistre',False))]}">
                         <group>
                             <group>
                                 <field name="date_expert_assign"/>
@@ -165,10 +153,10 @@
                     <page string="Modifications" attrs="{'invisible': [('type_project', 'in', ('project','sinistre',False))]}">
                         <group>
                             <group>
-                                <field name="update_state"/>
+                                <field name="date_update"/>
                             </group> 
                             <group>
-                                <field name="date_update"/>
+                                <field name="update_state" string="État Modifications"/>
                             </group> 
                             <field name="update"/>
                         </group>             
