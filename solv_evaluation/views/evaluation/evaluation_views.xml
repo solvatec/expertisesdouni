@@ -36,7 +36,7 @@
                     <field name="stage_id" invisible="1"/> 
                     <field name="create_uid" invisible="1"/> 
                 </xpath>
-                <xpath expr="//div[@name='options_active']" position="after">
+                <xpath expr="//notebook" position="before">
                     <group attrs="{'invisible': [('type_project', 'in', ('project','sinistre',False))]}">
                         <group>
                             <!-- <field name="num_dossier"/> -->
