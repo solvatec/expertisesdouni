@@ -50,6 +50,15 @@ class ResPartner(models.Model):
         string='Type de compte'
     )
 
+    # Sites
+    partner_site_ids = fields.Many2many(
+        string='Sites',
+        comodel_name='res.partner',
+        relation='site_res_partner_rel',
+        column1='parent_id',
+        column2='site_partner_id',
+    )
+
     # ------------------------------------------------------------------------
     # CONSTRAINTS
     # ------------------------------------------------------------------------
