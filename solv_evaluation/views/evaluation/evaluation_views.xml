@@ -20,7 +20,7 @@
                 <xpath expr="//div[@name='options_active']" position="attributes">
                     <attribute name="attrs">{'invisible': [('type_project', 'not in', ('project',False))]}</attribute>
                 </xpath>
-                <xpath expr="//sheet/div/button[1]" position="attributes">
+                <xpath expr="//sheet/div/button[2]" position="attributes">
                     <attribute name="attrs">{'invisible': [('type_project', 'not in', ('project',False))]}</attribute>
                 </xpath>                
             </field>
