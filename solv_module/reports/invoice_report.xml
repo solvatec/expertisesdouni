@@ -2,19 +2,33 @@
 <odoo>
         <template id="solv_report_invoice_document" inherit_id="account.report_invoice_document">
             <xpath expr="//t[@t-set='address']" position="replace">
-                <t t-set="address">
+                <br/>
+                <div class="row">
+                    <div class="col-5"></div>
+                    <div class="col-2" style="font-size:16px">
+                        
+                            <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">FACTURE</span>
+                            <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">FACTURE BROUILLON</span>
+                            <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">FACTURE ANULLEE</span>
+                            <span t-if="o.move_type == 'out_refund'">Credit Note</span>
+                            <span t-if="o.move_type == 'in_refund'">Vendor Credit Note</span>
+                            <span t-if="o.move_type == 'in_invoice'">Vendor Bill</span>
+                            <!-- <span t-if="o.name != '/'" t-field="o.name"/> -->
+                    </div>
+                    <div class="col-5"></div>
+                </div>
+                <!-- <t t-set="address">
                     <address t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
                     <div t-if="o.partner_id.vat" class="mt16">
                         <t t-if="o.company_id.country_id.vat_label" t-esc="o.company_id.country_id.vat_label" id="inv_tax_id_label"/>
                         <t t-else="">ICE</t>: <span t-field="o.partner_id.vat"/></div>
-                </t>
+                </t> -->
             </xpath>
             <xpath expr="//div[@class='page']" position="replace">
                 <div class="page">
                     <!-- <xpath expr="//div[@class='address row']" position="after">
                         <t t-if="o.partner_id.vat"> <span t-esc="o.partner_id.vat" string="ICE" style="font-size:13px"/></t>
                     </xpath> -->
-                    <br/>
                     <!-- <div class="address row">
                         <div class="col-7">
                         </div>
@@ -25,8 +39,7 @@
                             <span t-if="o.partner_id.vat" t-esc="o.partner_id.vat" style="font-size:13px"/>
                         </div>
                     </div> -->
-                    <br/>
-                    <h2>
+                    <!-- <h2>
                         <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">FACTURE N°</span>
                         <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">FACTURE BROUILLON</span>
                         <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">FACTURE ANULLEE</span>
@@ -34,8 +47,22 @@
                         <span t-if="o.move_type == 'in_refund'">Vendor Credit Note</span>
                         <span t-if="o.move_type == 'in_invoice'">Vendor Bill</span>
                         <span t-if="o.name != '/'" t-field="o.name"/>
-                    </h2>
-                    <div class="col-3"></div>
+                    </h2> -->
+                    <div class="row">
+                        <div class="col-4" style="font-size:13px">
+                            <span>Facturé à</span><br/>
+                            <B><span t-esc="o.partner_id.name" style="font-size:13px"/></B><br/>
+                            <span t-if="o.partner_id.street" t-esc="o.partner_id.street" style="font-size:13px"/><br/>
+                            <span t-if="o.partner_id.street2" t-esc="o.partner_id.street" style="font-size:13px"/>
+                            <span t-if="o.partner_id.city" t-esc="o.partner_id.city" style="font-size:13px"/><br/>
+                            <t t-if="o.partner_id.vat"> ICE : <span  t-esc="o.partner_id.vat" style="font-size:13px"/></t>
+                        </div>
+                        <div class="col-6"></div>
+                        <div class="col-2" style="font-size:13px">
+                            <span>N° de Facture</span><br/> 
+                            <B><span t-if="o.name" t-esc="o.name" style="font-size:13px"/></B>
+                        </div>
+                    </div>
                     <br/>
                     <table class="table table-sm o_main_table" name="invoice_line_table">
                         <thead>
@@ -117,7 +144,7 @@
                                 <!-- TODO: remove in master -->
                                 <t t-set="colspan" t-value="6"/>
                                 <!-- <th class="text-left"><span>Référence</span></th> -->
-                                <th class="text-left"><span>Désignation</span></th>
+                                <th class="text-left"><span>Article &amp; Description</span></th>
                                 <!-- <th class="text-right"><span>Quantité</span></th> -->
                                 <th t-if="display_discount" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                     <span>Remise(%)</span>
