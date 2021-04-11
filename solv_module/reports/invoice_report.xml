@@ -2,6 +2,7 @@
 <odoo>
         <template id="solv_report_invoice_document" inherit_id="account.report_invoice_document">
             <xpath expr="//t[@t-set='address']" position="replace">
+                <br/>
                 <div class="row">
                     <div class="col-5"></div>
                     <div class="col-2" style="font-size:16px">
