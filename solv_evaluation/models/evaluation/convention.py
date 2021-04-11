@@ -97,12 +97,45 @@ class ProjectProject(models.Model):
     )
 
     # Collaborateurs
-    partner_ids = fields.Many2many(
+    # partner_ids = fields.Many2many(
+    #     string='Collaborateurs',
+    #     comodel_name='res.partner',
+    #     relation='project_project_eval_partner_rel',
+    #     column1='parent_id',
+    #     column2='eval_partner_id',
+    # )
+
+    collaborator_ids = fields.One2many(
         string='Collaborateurs',
+        comodel_name='collaborator.line',
+        inverse_name='project_eval_id'
+    )
+
+    # Expert(s)
+    expert_id = fields.Many2one(
+        string='Expert',
         comodel_name='res.partner',
-        relation='project_project_eval_partner_rel',
-        column1='parent_id',
-        column2='eval_partner_id',
+        # relation='project_project_expert_eval_partner_rel',
+        # column1='parent_id',
+        # column2='expert_eval_partner_id',
+    )
+
+    # Vérificateurs
+    auditor_id = fields.Many2one(
+        string='Vérificateur',
+        comodel_name='res.partner',
+        # relation='project_project_auditor_eval_partner_rel',
+        # column1='parent_id',
+        # column2='auditor_eval_partner_id',
+    )
+
+    # Assistant(e)
+    assistant_id = fields.Many2one(
+        string='Assistant(e)',
+        comodel_name='res.partner',
+        # relation='project_project_assistant_eval_partner_rel',
+        # column1='parent_id',
+        # column2='assistant_eval_partner_id',
     )
 
     # Dates de la Commande
@@ -334,6 +367,13 @@ class ProjectProject(models.Model):
         stage_ids = self.env['project.stage'].search([('type_project_stage','=','evaluation')])
         return stage_ids
 
+    ### collaborateurs ###
+    @api.onchange('expert_id','auditor_id','assistant_id','partner_ids.collaborator')
+    def _get_collaborators(self):
+        partners = self.env['res.partner'].search([('id', 'in', [self.expert_id.id,self.auditor_id.id,self.assistant_id.id])])
+        for record in self:
+            for line in partners:
+                record.collaborator_ids.write({'partner_id': line.id})
 
 class ProjectStage(models.Model):
     _name = 'project.stage'
@@ -391,10 +431,14 @@ class ResPartner(models.Model):
     # FIELDS
     # ------------------------------------------------------------------------
 
-    collaborator_id = fields.Many2one(
+    collaborator = fields.Char(
         string="Type",
-        comodel_name='type.collaborator',
     )
+
+    # collaborator_id = fields.Many2one(
+    #     string="Type",
+    #     comodel_name='type.collaborator',
+    # )
 
     # ------------------------------------------------------------------------
     # METHODS
@@ -409,6 +453,27 @@ class TypeCollaborator(models.Model):
 
     name = fields.Char(
         string='Nom',
+    )
+
+class CollaboratorLine(models.Model):
+    _name = 'collaborator.line'
+
+    # ------------------------------------------------------------------------
+    # FIELDS
+    # ------------------------------------------------------------------------
+
+    project_eval_id = fields.Many2one(
+        comodel_name='project.project',
+        string='Evaluation',
+    )
+
+    partner_id = fields.Many2one(
+        comodel_name='res.partner',
+        string='Collaborateur',
+    )
+
+    collaborator_type = fields.Char(
+        string='Type',
     )
     
     

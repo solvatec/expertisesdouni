@@ -36,7 +36,7 @@
                     <field name="stage_id" invisible="1"/> 
                     <field name="create_uid" invisible="1"/> 
                 </xpath>
-                <xpath expr="//div[@name='options_active']" position="after">
+                <xpath expr="//notebook" position="before">
                     <group attrs="{'invisible': [('type_project', 'in', ('project','sinistre',False))]}">
                         <group>
                             <!-- <field name="num_dossier"/> -->
@@ -47,7 +47,10 @@
                             <field name="nature_mission"/> 
                             <field name="nature_dossier" string="DI ou MAJ ?"/>
                             <field name="type_maj" attrs="{'invisible': [('nature_dossier', '=', 'dossier_initial')]}"/> 
-                            <field name="num_maj" attrs="{'invisible': [('nature_dossier', '=', 'dossier_initial')]}"/> 
+                            <field name="num_maj" attrs="{'invisible': [('nature_dossier', '=', 'dossier_initial')]}"/>
+                            <field name="expert_id"/> 
+                            <field name="auditor_id"/> 
+                            <field name="assistant_id"/> 
                         </group>
                         <group>
                             <field name="state"/>
@@ -65,10 +68,11 @@
                 </xpath>
                 <xpath expr="//page[@name='description_page']" position="before">
                     <page string="Collaborateurs" attrs="{'invisible': [('type_project', 'in', ('project','sinistre',False))]}">
-                        <field name="partner_ids">
+                        <field name="collaborator_ids">
                             <tree string="Collaborateurs" editable="bottom">
-                                <field name="name"/>
-                                <field name="collaborator_id"/>
+                                <field name="project_eval_id" invisible="1"/>
+                                <field name="partner_id"/>
+                                <field name="collaborator_type"/>
                             </tree>
                         </field> 
                         <div class="oe_chatter">
