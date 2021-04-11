@@ -5,4 +5,3 @@ from . import sale
 from . import account
 from . import invoice_letters
 from . import hr
-from . import crm

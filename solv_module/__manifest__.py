@@ -17,7 +17,7 @@
     # any module necessary for this one to work correctly
     'depends': [
         'base',
-        # 'sale',
+        'sale',
         'sale_management',
         'account',
         'hr',
@@ -36,16 +36,15 @@
         #views
         'views/base/res_company_views.xml',
         'views/base/res_partner_views.xml',
-        # 'views/sale/sale_order_views.xml',
+        'views/sale/sale_order_views.xml',
         'views/account/invoice_views.xml',
         'views/hr/hr_employee_views.xml',
-        'views/crm/crm_lead_views.xml',
         
         #wizards
         # 'wizard/wizard_add_product_view.xml',
 
         # reports
-        # 'reports/sale_order_report.xml',
+        'reports/sale_order_report.xml',
         'reports/invoice_report.xml',
         # 'reports/deliveryslip_report.xml',
     ],
