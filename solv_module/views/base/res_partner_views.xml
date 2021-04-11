@@ -36,8 +36,20 @@
                     <field name="parent_id" widget="res_partner_many2one" placeholder="Société" domain="[('is_company', '=', True)]" context="{'default_is_company': True, 'show_vat': True}" attrs="{'invisible': ['|', '&amp;', ('is_company','=', False),('is_company','!=', False),('parent_id', '=', False),('company_name', '!=', False),('company_name', '!=', '')]}"/>
                     <!-- <field name="parent_id" widget="res_partner_many2one" placeholder="Société" domain="[('is_company', '=', True)]" context="{'default_is_company': True, 'show_vat': True}" attrs="{'invisible': ['|', '&amp;', ('is_company','!=', True),('parent_id', '=', False),('company_name', '!=', False),('company_name', '!=', '')]}"/>   -->                 
                 </xpath>
+                <xpath expr="//page[@name='contact_addresses']" position="after"> 
+                    <page string="Sites" name="partner_sites" attrs="{'invisible': [('company_type', '=', 'person')]}">
+                        <field name="partner_site_ids"/>
+                    </page>
+                </xpath>
+                <xpath expr="//field[@name='property_payment_term_id']" position="after"> 
+                    <field name="customer_rank" string="Est un client"/>
+                </xpath> 
+                <xpath expr="//field[@name='property_supplier_payment_term_id']" position="after"> 
+                    <field name="supplier_rank" string="Est un fournisseur"/>
+                </xpath> 
             </field>
         </record>
+
 
         <!-- form view inherited to make phone required filed -->
         <!-- <record id="partner_form_send_sms_form_view_inherit" model="ir.ui.view">
