@@ -5,14 +5,14 @@
                 <br/>
                 <div class="row">
                     <div class="col-5"></div>
-                    <div class="col-2" style="font-size:16px">
+                    <div class="col-2" style="font-size:25px">
                         
                             <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">FACTURE</span>
-                            <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">FACTURE BROUILLON</span>
+                            <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">FACTURE</span>
                             <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">FACTURE ANULLEE</span>
-                            <span t-if="o.move_type == 'out_refund'">Credit Note</span>
-                            <span t-if="o.move_type == 'in_refund'">Vendor Credit Note</span>
-                            <span t-if="o.move_type == 'in_invoice'">Vendor Bill</span>
+                            <span t-if="o.move_type == 'out_refund'">AVOIR</span>
+                            <span t-if="o.move_type == 'in_refund'">AVOIR F</span>
+                            <span t-if="o.move_type == 'in_invoice'">FACTURE</span>
                             <!-- <span t-if="o.name != '/'" t-field="o.name"/> -->
                     </div>
                     <div class="col-5"></div>
@@ -51,22 +51,24 @@
                     <div class="row">
                         <div class="col-4" style="font-size:13px">
                             <span>Facturé à</span><br/>
-                            <B><span t-esc="o.partner_id.name" style="font-size:13px"/></B><br/>
+                            <B><span t-esc="o.partner_id.name" style="font-size:15px"/></B><br/>
                             <span t-if="o.partner_id.street" t-esc="o.partner_id.street" style="font-size:13px"/><br/>
                             <span t-if="o.partner_id.street2" t-esc="o.partner_id.street" style="font-size:13px"/>
                             <span t-if="o.partner_id.city" t-esc="o.partner_id.city" style="font-size:13px"/><br/>
                             <t t-if="o.partner_id.vat"> ICE : <span  t-esc="o.partner_id.vat" style="font-size:13px"/></t>
                         </div>
-                        <div class="col-6"></div>
-                        <div class="col-2" style="font-size:13px">
-                            <span>N° de Facture</span><br/> 
-                            <B><span t-if="o.name" t-esc="o.name" style="font-size:13px"/></B>
+                        <div class="col-5"></div>
+                        <div class="col-3" style="font-size:13px">
+                            <span t-if="o.move_type == 'in_invoice'"><span>N° de Facture</span><br/></span>
+                            <span t-if="o.move_type == 'out_invoice'"><span>N° de Facture</span><br/></span>
+                            <span t-if="o.move_type == 'out_refund'"><span>Avoir N°</span><br/></span>
+                            <B><span t-if="o.name" t-esc="o.name" style="font-size:15px"/></B>
                         </div>
                     </div>
                     <br/>
                     <table class="table table-sm o_main_table" name="invoice_line_table">
                         <thead>
-                            <tr style="background-color:#bfc9ca  ">
+                            <tr style="background-color:#eff0f1  ">
                                 <th class="text-left"><span>Date de facture</span></th>
                                 <th class="text-left"><span>Conditions</span></th>
                                 <th class="text-left"><span>Date d'échéance</span></th>
@@ -140,7 +142,7 @@
 
                     <table class="table table-sm o_main_table" name="invoice_line_table">
                         <thead>
-                            <tr style="background-color:#bfc9ca ">
+                            <tr style="background-color:#eff0f1 ">
                                 <!-- TODO: remove in master -->
                                 <t t-set="colspan" t-value="6"/>
                                 <!-- <th class="text-left"><span>Référence</span></th> -->
@@ -268,6 +270,13 @@
                     <p>
                         <strong>Arrêter la facture à la somme de:</strong>
                         <p t-esc="o.get_amount_letter()"/>
+                    </p>
+                    <br/><br/>
+                    <p>
+                        NOTRE COMPTE N° :<br/>
+                        007 780 00 03542000000751 82<br/>
+                        SUR ATTIJARIWAFA BANK<br/>
+                        AGENCE CASA MAARIF
                     </p>
                     <!-- <p t-if="o.ref">
                         Please use the following communication for your payment : <b><span t-field="o.ref"/></b>
