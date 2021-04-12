@@ -5,15 +5,16 @@
                 <br/>
                 <div class="row">
                     <div class="col-5"></div>
-                    <div class="col-2" style="font-size:25px">
-                        
+                    <div class="col-2" style="font-size:22px">
+                        <B>
                             <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">FACTURE</span>
                             <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">FACTURE</span>
-                            <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">FACTURE ANULLEE</span>
+                            <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">FACTURE</span>
                             <span t-if="o.move_type == 'out_refund'">AVOIR</span>
                             <span t-if="o.move_type == 'in_refund'">AVOIR F</span>
                             <span t-if="o.move_type == 'in_invoice'">FACTURE</span>
                             <!-- <span t-if="o.name != '/'" t-field="o.name"/> -->
+                        </B>
                     </div>
                     <div class="col-5"></div>
                 </div>
@@ -66,7 +67,7 @@
                         </div>
                     </div>
                     <br/>
-                    <table class="table table-sm o_main_table" name="invoice_line_table">
+                    <table class="table table-sm o_main_table" name="invoice_line_table" style="font-size:14px">
                         <thead>
                             <tr style="background-color:#eff0f1  ">
                                 <th class="text-left"><span>Date de facture</span></th>
@@ -140,7 +141,7 @@
 
                     <t t-set="display_discount" t-value="any([l.discount for l in o.invoice_line_ids])"/>
 
-                    <table class="table table-sm o_main_table" name="invoice_line_table">
+                    <table class="table table-sm o_main_table" name="invoice_line_table" style="font-size:14px">
                         <thead>
                             <tr style="background-color:#eff0f1 ">
                                 <!-- TODO: remove in master -->
@@ -219,7 +220,7 @@
                         </tbody>
                     </table>
 
-                    <div class="clearfix">
+                    <div class="clearfix" style="font-size:14px">
                         <div id="total" class="row">
                             <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
                                 <table class="table table-sm">
@@ -262,17 +263,40 @@
                                             <span t-field="o.amount_total"/>
                                         </td>
                                     </tr>
+                                    <t t-if="print_with_payments">
+                                        <t t-if="o.payment_state != 'invoicing_legacy'">
+                                            <t t-set="payments_vals" t-value="o.sudo()._get_reconciled_info_JSON_values()"/>
+                                            <t t-foreach="payments_vals" t-as="payment_vals">
+                                                <tr>
+                                                    <td>
+                                                        <i class="oe_form_field text-right oe_payment_label">Payé le <t t-esc="payment_vals['date']" t-options="{&quot;widget&quot;: &quot;date&quot;}"/></i>
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <span t-esc="payment_vals['amount']" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                            <t t-if="len(payments_vals) &gt; 0">
+                                                <tr class="border-black">
+                                                    <td><strong>Montant Dû</strong></td>
+                                                    <td class="text-right">
+                                                        <span t-field="o.amount_residual"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                    </t>
                                 </table>
                             </div>
                         </div>
                     </div>
 
-                    <p>
+                    <p style="font-size:14px">
                         <strong>Arrêter la facture à la somme de:</strong>
                         <p t-esc="o.get_amount_letter()"/>
                     </p>
                     <br/><br/>
-                    <p>
+                    <p style="font-size:14px">
                         NOTRE COMPTE N° :<br/>
                         007 780 00 03542000000751 82<br/>
                         SUR ATTIJARIWAFA BANK<br/>
